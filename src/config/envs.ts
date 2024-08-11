@@ -7,6 +7,7 @@ interface EnvVars {
   SECRET_ENDPOINT: string;
   URL_SUCCESS: string;
   URL_CANCEL: string;
+  NATS_SERVERS: string;
 }
 
 const envsSchema = joi
@@ -16,10 +17,14 @@ const envsSchema = joi
     SECRET_ENDPOINT: joi.string().required(),
     URL_SUCCESS: joi.string().required(),
     URL_CANCEL: joi.string().required(),
+    NATS_SERVERS: joi.array().items(joi.string()).required(),
   })
   .unknown(true);
 
-const { error, value } = envsSchema.validate(process.env);
+const { error, value } = envsSchema.validate({
+  ...process.env,
+  NATS_SERVERS: process.env.NATS_SERVERS.split(','),
+});
 
 if (error) {
   throw new Error(`Config validation error ${error.message}`);
@@ -33,4 +38,5 @@ export const envs = {
   secretEndpoint: envVars.SECRET_ENDPOINT,
   urlSuccess: envVars.URL_SUCCESS,
   urlCancel: envVars.URL_CANCEL,
+  natsServers: envVars.NATS_SERVERS,
 };

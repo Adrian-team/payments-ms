@@ -14,3 +14,10 @@
 2. Crear un webhook que permita a Stripe avisarnos cuando es realizado un pago
 3. Uso de proteccion de endpoint a traves de secretKey stripe
 4. Integracion de metadata
+
+
+#### Temario curso seccion 11 (02-products-app/payments-ms)
+1. EventPattern // Para envios que no espera una respuesta
+2 .Payments hacia Orders
+3 .Webhook
+4 .Modificaciones a la estructura de la base de datos
